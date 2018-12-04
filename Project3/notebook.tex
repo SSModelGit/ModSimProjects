@@ -1,0 +1,760 @@
+
+% Default to the notebook output style
+
+    
+
+
+% Inherit from the specified cell style.
+
+
+
+
+    
+\documentclass[11pt]{article}
+
+    
+    
+    \usepackage[T1]{fontenc}
+    % Nicer default font (+ math font) than Computer Modern for most use cases
+    \usepackage{mathpazo}
+
+    % Basic figure setup, for now with no caption control since it's done
+    % automatically by Pandoc (which extracts ![](path) syntax from Markdown).
+    \usepackage{graphicx}
+    % We will generate all images so they have a width \maxwidth. This means
+    % that they will get their normal width if they fit onto the page, but
+    % are scaled down if they would overflow the margins.
+    \makeatletter
+    \def\maxwidth{\ifdim\Gin@nat@width>\linewidth\linewidth
+    \else\Gin@nat@width\fi}
+    \makeatother
+    \let\Oldincludegraphics\includegraphics
+    % Set max figure width to be 80% of text width, for now hardcoded.
+    \renewcommand{\includegraphics}[1]{\Oldincludegraphics[width=.8\maxwidth]{#1}}
+    % Ensure that by default, figures have no caption (until we provide a
+    % proper Figure object with a Caption API and a way to capture that
+    % in the conversion process - todo).
+    \usepackage{caption}
+    \DeclareCaptionLabelFormat{nolabel}{}
+    \captionsetup{labelformat=nolabel}
+
+    \usepackage{adjustbox} % Used to constrain images to a maximum size 
+    \usepackage{xcolor} % Allow colors to be defined
+    \usepackage{enumerate} % Needed for markdown enumerations to work
+    \usepackage{geometry} % Used to adjust the document margins
+    \usepackage{amsmath} % Equations
+    \usepackage{amssymb} % Equations
+    \usepackage{textcomp} % defines textquotesingle
+    % Hack from http://tex.stackexchange.com/a/47451/13684:
+    \AtBeginDocument{%
+        \def\PYZsq{\textquotesingle}% Upright quotes in Pygmentized code
+    }
+    \usepackage{upquote} % Upright quotes for verbatim code
+    \usepackage{eurosym} % defines \euro
+    \usepackage[mathletters]{ucs} % Extended unicode (utf-8) support
+    \usepackage[utf8x]{inputenc} % Allow utf-8 characters in the tex document
+    \usepackage{fancyvrb} % verbatim replacement that allows latex
+    \usepackage{grffile} % extends the file name processing of package graphics 
+                         % to support a larger range 
+    % The hyperref package gives us a pdf with properly built
+    % internal navigation ('pdf bookmarks' for the table of contents,
+    % internal cross-reference links, web links for URLs, etc.)
+    \usepackage{hyperref}
+    \usepackage{longtable} % longtable support required by pandoc >1.10
+    \usepackage{booktabs}  % table support for pandoc > 1.12.2
+    \usepackage[inline]{enumitem} % IRkernel/repr support (it uses the enumerate* environment)
+    \usepackage[normalem]{ulem} % ulem is needed to support strikethroughs (\sout)
+                                % normalem makes italics be italics, not underlines
+    
+
+    
+    
+    % Colors for the hyperref package
+    \definecolor{urlcolor}{rgb}{0,.145,.698}
+    \definecolor{linkcolor}{rgb}{.71,0.21,0.01}
+    \definecolor{citecolor}{rgb}{.12,.54,.11}
+
+    % ANSI colors
+    \definecolor{ansi-black}{HTML}{3E424D}
+    \definecolor{ansi-black-intense}{HTML}{282C36}
+    \definecolor{ansi-red}{HTML}{E75C58}
+    \definecolor{ansi-red-intense}{HTML}{B22B31}
+    \definecolor{ansi-green}{HTML}{00A250}
+    \definecolor{ansi-green-intense}{HTML}{007427}
+    \definecolor{ansi-yellow}{HTML}{DDB62B}
+    \definecolor{ansi-yellow-intense}{HTML}{B27D12}
+    \definecolor{ansi-blue}{HTML}{208FFB}
+    \definecolor{ansi-blue-intense}{HTML}{0065CA}
+    \definecolor{ansi-magenta}{HTML}{D160C4}
+    \definecolor{ansi-magenta-intense}{HTML}{A03196}
+    \definecolor{ansi-cyan}{HTML}{60C6C8}
+    \definecolor{ansi-cyan-intense}{HTML}{258F8F}
+    \definecolor{ansi-white}{HTML}{C5C1B4}
+    \definecolor{ansi-white-intense}{HTML}{A1A6B2}
+
+    % commands and environments needed by pandoc snippets
+    % extracted from the output of `pandoc -s`
+    \providecommand{\tightlist}{%
+      \setlength{\itemsep}{0pt}\setlength{\parskip}{0pt}}
+    \DefineVerbatimEnvironment{Highlighting}{Verbatim}{commandchars=\\\{\}}
+    % Add ',fontsize=\small' for more characters per line
+    \newenvironment{Shaded}{}{}
+    \newcommand{\KeywordTok}[1]{\textcolor[rgb]{0.00,0.44,0.13}{\textbf{{#1}}}}
+    \newcommand{\DataTypeTok}[1]{\textcolor[rgb]{0.56,0.13,0.00}{{#1}}}
+    \newcommand{\DecValTok}[1]{\textcolor[rgb]{0.25,0.63,0.44}{{#1}}}
+    \newcommand{\BaseNTok}[1]{\textcolor[rgb]{0.25,0.63,0.44}{{#1}}}
+    \newcommand{\FloatTok}[1]{\textcolor[rgb]{0.25,0.63,0.44}{{#1}}}
+    \newcommand{\CharTok}[1]{\textcolor[rgb]{0.25,0.44,0.63}{{#1}}}
+    \newcommand{\StringTok}[1]{\textcolor[rgb]{0.25,0.44,0.63}{{#1}}}
+    \newcommand{\CommentTok}[1]{\textcolor[rgb]{0.38,0.63,0.69}{\textit{{#1}}}}
+    \newcommand{\OtherTok}[1]{\textcolor[rgb]{0.00,0.44,0.13}{{#1}}}
+    \newcommand{\AlertTok}[1]{\textcolor[rgb]{1.00,0.00,0.00}{\textbf{{#1}}}}
+    \newcommand{\FunctionTok}[1]{\textcolor[rgb]{0.02,0.16,0.49}{{#1}}}
+    \newcommand{\RegionMarkerTok}[1]{{#1}}
+    \newcommand{\ErrorTok}[1]{\textcolor[rgb]{1.00,0.00,0.00}{\textbf{{#1}}}}
+    \newcommand{\NormalTok}[1]{{#1}}
+    
+    % Additional commands for more recent versions of Pandoc
+    \newcommand{\ConstantTok}[1]{\textcolor[rgb]{0.53,0.00,0.00}{{#1}}}
+    \newcommand{\SpecialCharTok}[1]{\textcolor[rgb]{0.25,0.44,0.63}{{#1}}}
+    \newcommand{\VerbatimStringTok}[1]{\textcolor[rgb]{0.25,0.44,0.63}{{#1}}}
+    \newcommand{\SpecialStringTok}[1]{\textcolor[rgb]{0.73,0.40,0.53}{{#1}}}
+    \newcommand{\ImportTok}[1]{{#1}}
+    \newcommand{\DocumentationTok}[1]{\textcolor[rgb]{0.73,0.13,0.13}{\textit{{#1}}}}
+    \newcommand{\AnnotationTok}[1]{\textcolor[rgb]{0.38,0.63,0.69}{\textbf{\textit{{#1}}}}}
+    \newcommand{\CommentVarTok}[1]{\textcolor[rgb]{0.38,0.63,0.69}{\textbf{\textit{{#1}}}}}
+    \newcommand{\VariableTok}[1]{\textcolor[rgb]{0.10,0.09,0.49}{{#1}}}
+    \newcommand{\ControlFlowTok}[1]{\textcolor[rgb]{0.00,0.44,0.13}{\textbf{{#1}}}}
+    \newcommand{\OperatorTok}[1]{\textcolor[rgb]{0.40,0.40,0.40}{{#1}}}
+    \newcommand{\BuiltInTok}[1]{{#1}}
+    \newcommand{\ExtensionTok}[1]{{#1}}
+    \newcommand{\PreprocessorTok}[1]{\textcolor[rgb]{0.74,0.48,0.00}{{#1}}}
+    \newcommand{\AttributeTok}[1]{\textcolor[rgb]{0.49,0.56,0.16}{{#1}}}
+    \newcommand{\InformationTok}[1]{\textcolor[rgb]{0.38,0.63,0.69}{\textbf{\textit{{#1}}}}}
+    \newcommand{\WarningTok}[1]{\textcolor[rgb]{0.38,0.63,0.69}{\textbf{\textit{{#1}}}}}
+    
+    
+    % Define a nice break command that doesn't care if a line doesn't already
+    % exist.
+    \def\br{\hspace*{\fill} \\* }
+    % Math Jax compatability definitions
+    \def\gt{>}
+    \def\lt{<}
+    % Document parameters
+    \title{Earth Launcher Essay}
+    
+    
+    
+
+    % Pygments definitions
+    
+\makeatletter
+\def\PY@reset{\let\PY@it=\relax \let\PY@bf=\relax%
+    \let\PY@ul=\relax \let\PY@tc=\relax%
+    \let\PY@bc=\relax \let\PY@ff=\relax}
+\def\PY@tok#1{\csname PY@tok@#1\endcsname}
+\def\PY@toks#1+{\ifx\relax#1\empty\else%
+    \PY@tok{#1}\expandafter\PY@toks\fi}
+\def\PY@do#1{\PY@bc{\PY@tc{\PY@ul{%
+    \PY@it{\PY@bf{\PY@ff{#1}}}}}}}
+\def\PY#1#2{\PY@reset\PY@toks#1+\relax+\PY@do{#2}}
+
+\expandafter\def\csname PY@tok@w\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.73,0.73}{##1}}}
+\expandafter\def\csname PY@tok@c\endcsname{\let\PY@it=\textit\def\PY@tc##1{\textcolor[rgb]{0.25,0.50,0.50}{##1}}}
+\expandafter\def\csname PY@tok@cp\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.74,0.48,0.00}{##1}}}
+\expandafter\def\csname PY@tok@k\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@kp\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@kt\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.69,0.00,0.25}{##1}}}
+\expandafter\def\csname PY@tok@o\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.40,0.40,0.40}{##1}}}
+\expandafter\def\csname PY@tok@ow\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.67,0.13,1.00}{##1}}}
+\expandafter\def\csname PY@tok@nb\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@nf\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.00,0.00,1.00}{##1}}}
+\expandafter\def\csname PY@tok@nc\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.00,1.00}{##1}}}
+\expandafter\def\csname PY@tok@nn\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.00,1.00}{##1}}}
+\expandafter\def\csname PY@tok@ne\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.82,0.25,0.23}{##1}}}
+\expandafter\def\csname PY@tok@nv\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.10,0.09,0.49}{##1}}}
+\expandafter\def\csname PY@tok@no\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.53,0.00,0.00}{##1}}}
+\expandafter\def\csname PY@tok@nl\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.63,0.63,0.00}{##1}}}
+\expandafter\def\csname PY@tok@ni\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.60,0.60,0.60}{##1}}}
+\expandafter\def\csname PY@tok@na\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.49,0.56,0.16}{##1}}}
+\expandafter\def\csname PY@tok@nt\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@nd\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.67,0.13,1.00}{##1}}}
+\expandafter\def\csname PY@tok@s\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+\expandafter\def\csname PY@tok@sd\endcsname{\let\PY@it=\textit\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+\expandafter\def\csname PY@tok@si\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.73,0.40,0.53}{##1}}}
+\expandafter\def\csname PY@tok@se\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.73,0.40,0.13}{##1}}}
+\expandafter\def\csname PY@tok@sr\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.40,0.53}{##1}}}
+\expandafter\def\csname PY@tok@ss\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.10,0.09,0.49}{##1}}}
+\expandafter\def\csname PY@tok@sx\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@m\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.40,0.40,0.40}{##1}}}
+\expandafter\def\csname PY@tok@gh\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.00,0.50}{##1}}}
+\expandafter\def\csname PY@tok@gu\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.50,0.00,0.50}{##1}}}
+\expandafter\def\csname PY@tok@gd\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.63,0.00,0.00}{##1}}}
+\expandafter\def\csname PY@tok@gi\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.00,0.63,0.00}{##1}}}
+\expandafter\def\csname PY@tok@gr\endcsname{\def\PY@tc##1{\textcolor[rgb]{1.00,0.00,0.00}{##1}}}
+\expandafter\def\csname PY@tok@ge\endcsname{\let\PY@it=\textit}
+\expandafter\def\csname PY@tok@gs\endcsname{\let\PY@bf=\textbf}
+\expandafter\def\csname PY@tok@gp\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.00,0.50}{##1}}}
+\expandafter\def\csname PY@tok@go\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.53,0.53,0.53}{##1}}}
+\expandafter\def\csname PY@tok@gt\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.00,0.27,0.87}{##1}}}
+\expandafter\def\csname PY@tok@err\endcsname{\def\PY@bc##1{\setlength{\fboxsep}{0pt}\fcolorbox[rgb]{1.00,0.00,0.00}{1,1,1}{\strut ##1}}}
+\expandafter\def\csname PY@tok@kc\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@kd\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@kn\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@kr\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@bp\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@fm\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.00,0.00,1.00}{##1}}}
+\expandafter\def\csname PY@tok@vc\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.10,0.09,0.49}{##1}}}
+\expandafter\def\csname PY@tok@vg\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.10,0.09,0.49}{##1}}}
+\expandafter\def\csname PY@tok@vi\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.10,0.09,0.49}{##1}}}
+\expandafter\def\csname PY@tok@vm\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.10,0.09,0.49}{##1}}}
+\expandafter\def\csname PY@tok@sa\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+\expandafter\def\csname PY@tok@sb\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+\expandafter\def\csname PY@tok@sc\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+\expandafter\def\csname PY@tok@dl\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+\expandafter\def\csname PY@tok@s2\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+\expandafter\def\csname PY@tok@sh\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+\expandafter\def\csname PY@tok@s1\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+\expandafter\def\csname PY@tok@mb\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.40,0.40,0.40}{##1}}}
+\expandafter\def\csname PY@tok@mf\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.40,0.40,0.40}{##1}}}
+\expandafter\def\csname PY@tok@mh\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.40,0.40,0.40}{##1}}}
+\expandafter\def\csname PY@tok@mi\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.40,0.40,0.40}{##1}}}
+\expandafter\def\csname PY@tok@il\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.40,0.40,0.40}{##1}}}
+\expandafter\def\csname PY@tok@mo\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.40,0.40,0.40}{##1}}}
+\expandafter\def\csname PY@tok@ch\endcsname{\let\PY@it=\textit\def\PY@tc##1{\textcolor[rgb]{0.25,0.50,0.50}{##1}}}
+\expandafter\def\csname PY@tok@cm\endcsname{\let\PY@it=\textit\def\PY@tc##1{\textcolor[rgb]{0.25,0.50,0.50}{##1}}}
+\expandafter\def\csname PY@tok@cpf\endcsname{\let\PY@it=\textit\def\PY@tc##1{\textcolor[rgb]{0.25,0.50,0.50}{##1}}}
+\expandafter\def\csname PY@tok@c1\endcsname{\let\PY@it=\textit\def\PY@tc##1{\textcolor[rgb]{0.25,0.50,0.50}{##1}}}
+\expandafter\def\csname PY@tok@cs\endcsname{\let\PY@it=\textit\def\PY@tc##1{\textcolor[rgb]{0.25,0.50,0.50}{##1}}}
+
+\def\PYZbs{\char`\\}
+\def\PYZus{\char`\_}
+\def\PYZob{\char`\{}
+\def\PYZcb{\char`\}}
+\def\PYZca{\char`\^}
+\def\PYZam{\char`\&}
+\def\PYZlt{\char`\<}
+\def\PYZgt{\char`\>}
+\def\PYZsh{\char`\#}
+\def\PYZpc{\char`\%}
+\def\PYZdl{\char`\$}
+\def\PYZhy{\char`\-}
+\def\PYZsq{\char`\'}
+\def\PYZdq{\char`\"}
+\def\PYZti{\char`\~}
+% for compatibility with earlier versions
+\def\PYZat{@}
+\def\PYZlb{[}
+\def\PYZrb{]}
+\makeatother
+
+
+    % Exact colors from NB
+    \definecolor{incolor}{rgb}{0.0, 0.0, 0.5}
+    \definecolor{outcolor}{rgb}{0.545, 0.0, 0.0}
+
+
+
+    
+    % Prevent overflowing lines due to hard-to-break entities
+    \sloppy 
+    % Setup hyperref package
+    \hypersetup{
+      breaklinks=true,  % so long urls are correctly broken across lines
+      colorlinks=true,
+      urlcolor=urlcolor,
+      linkcolor=linkcolor,
+      citecolor=citecolor,
+      }
+    % Slightly bigger margins than the latex defaults
+    
+    \geometry{verbose,tmargin=1in,bmargin=1in,lmargin=1in,rmargin=1in}
+    
+    
+
+    \begin{document}
+    
+    
+    \maketitle
+    
+    
+
+    
+    \hypertarget{earth-launcher}{%
+\section{Earth Launcher}\label{earth-launcher}}
+
+    The following code configures the notebook and imports relevant
+libraries
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}1}]:} \PY{c+c1}{\PYZsh{} Configure Jupyter so figures appear in the notebook}
+        \PY{o}{\PYZpc{}}\PY{k}{matplotlib} inline
+        
+        \PY{c+c1}{\PYZsh{} Configure Jupyter to display the assigned value after an assignment}
+        \PY{o}{\PYZpc{}}\PY{k}{config} InteractiveShell.ast\PYZus{}node\PYZus{}interactivity=\PYZsq{}last\PYZus{}expr\PYZus{}or\PYZus{}assign\PYZsq{}
+        \PY{c+c1}{\PYZsh{} import functions from the modsim.py module}
+        \PY{k+kn}{from} \PY{n+nn}{modsim} \PY{k}{import} \PY{o}{*}
+        \PY{k+kn}{import} \PY{n+nn}{numpy} \PY{k}{as} \PY{n+nn}{np}
+\end{Verbatim}
+
+
+    \hypertarget{question}{%
+\section{Question}\label{question}}
+
+    What are the design requirements for a railgun such that firing the
+railgun can accelerate the earth to the escape velocity of the sun?
+
+    The above modeling question might seem highly rediculous, hovever
+similar situations are being studied as spacecraft launch systems. One
+example is the electromagnetic mass driver which is a hypothetical
+concept of using a electromagnetically powered cannon, like a railgun or
+coilgun, to accelerate spacecraft for launch (see Applications section
+of the following page: https://en.wikipedia.org/wiki/Railgun or the
+dedicated page on the subject
+https://en.wikipedia.org/wiki/Mass\_driver) This project models the
+reverse situation where the momentum gennerated by the shot is intended
+to accelerate the earth rather than to accelerate a projectile.
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}2}]:} \PY{n}{m} \PY{o}{=} \PY{n}{UNITS}\PY{o}{.}\PY{n}{meter}
+        \PY{n}{s} \PY{o}{=} \PY{n}{UNITS}\PY{o}{.}\PY{n}{second}
+        \PY{n}{kg} \PY{o}{=} \PY{n}{UNITS}\PY{o}{.}\PY{n}{kilogram}
+        \PY{n}{A} \PY{o}{=} \PY{n}{UNITS}\PY{o}{.}\PY{n}{ampere}
+        \PY{n}{V} \PY{o}{=} \PY{n}{UNITS}\PY{o}{.}\PY{n}{volts}
+        \PY{n}{Ohm} \PY{o}{=} \PY{n}{UNITS}\PY{o}{.}\PY{n}{ohm}
+        \PY{n}{N} \PY{o}{=} \PY{n}{UNITS}\PY{o}{.}\PY{n}{newton}
+        \PY{n}{U\PYZus{}mu} \PY{o}{=} \PY{n}{N} \PY{o}{/} \PY{n}{A}\PY{o}{*}\PY{o}{*}\PY{l+m+mi}{2}
+        \PY{k+kc}{None}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}3}]:} \PY{n}{params\PYZus{}railgun} \PY{o}{=} \PY{n}{Params}\PY{p}{(}\PY{n}{x} \PY{o}{=} \PY{l+m+mi}{0} \PY{o}{*} \PY{n}{m}\PY{p}{,} 
+                                \PY{n}{d} \PY{o}{=} \PY{l+m+mi}{1} \PY{o}{*} \PY{n}{m}\PY{p}{,}
+                                \PY{n}{r} \PY{o}{=} \PY{l+m+mf}{0.1} \PY{o}{*} \PY{n}{m}\PY{p}{,}
+                                \PY{n}{L} \PY{o}{=} \PY{l+m+mi}{100} \PY{o}{*} \PY{n}{m}\PY{p}{,}
+                                \PY{n}{mass} \PY{o}{=} \PY{l+m+mi}{1} \PY{o}{*} \PY{n}{kg}\PY{p}{,}
+                                \PY{n}{Vs} \PY{o}{=} \PY{l+m+mi}{1000} \PY{o}{*} \PY{n}{V}\PY{p}{,}
+                                \PY{n}{R} \PY{o}{=} \PY{l+m+mf}{0.01} \PY{o}{*} \PY{n}{Ohm}\PY{p}{,}
+                                \PY{n}{mu\PYZus{}0} \PY{o}{=} \PY{l+m+mf}{1.257e\PYZhy{}6} \PY{o}{*} \PY{n}{U\PYZus{}mu}\PY{p}{,}
+                                \PY{n}{t\PYZus{}end} \PY{o}{=} \PY{l+m+mi}{100} \PY{o}{*} \PY{n}{s}\PY{p}{)}
+\end{Verbatim}
+
+
+\begin{Verbatim}[commandchars=\\\{\}]
+{\color{outcolor}Out[{\color{outcolor}3}]:} x                               0 meter
+        d                               1 meter
+        r                             0.1 meter
+        L                             100 meter
+        mass                         1 kilogram
+        Vs                            1000 volt
+        R                              0.01 ohm
+        mu\_0     1.257e-06 newton / ampere ** 2
+        t\_end                        100 second
+        dtype: object
+\end{Verbatim}
+            
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}4}]:} \PY{k}{def} \PY{n+nf}{make\PYZus{}railgun\PYZus{}system}\PY{p}{(}\PY{n}{params}\PY{p}{)}\PY{p}{:}
+            \PY{l+s+sd}{\PYZdq{}\PYZdq{}\PYZdq{}}
+        \PY{l+s+sd}{    Make a system object.}
+        \PY{l+s+sd}{    }
+        \PY{l+s+sd}{    Parameters:}
+        \PY{l+s+sd}{        params: Params object containing following:}
+        \PY{l+s+sd}{            x: Initial position of armature (in meters)}
+        \PY{l+s+sd}{            d: Separation distance between two rails (in meters)}
+        \PY{l+s+sd}{            r: Radii of the rails (in meters)}
+        \PY{l+s+sd}{            L: Length armature has to travel along rails before launch (in meters)}
+        \PY{l+s+sd}{            mass: Mass of armature (in kilograms)}
+        \PY{l+s+sd}{            Vs: (Initial) Voltage supply magnitude (in volts)}
+        \PY{l+s+sd}{            R: Resistance of railgun circuit (in ohms)}
+        \PY{l+s+sd}{            mu\PYZus{}0: Vacuum permeability constant (in N/A\PYZca{}2)}
+        \PY{l+s+sd}{            t\PYZus{}end: Simulation end time (in seconds)}
+        \PY{l+s+sd}{               }
+        \PY{l+s+sd}{    returns: System object containing}
+        \PY{l+s+sd}{        params values}
+        \PY{l+s+sd}{        c\PYZus{}mag: Calculated magnetic force coefficient (in N/A\PYZca{}2)}
+        \PY{l+s+sd}{        init: Initial state object containing:}
+        \PY{l+s+sd}{            x: Position of armature (initialized to params.x) (in meters)}
+        \PY{l+s+sd}{            v: Velocity of armature (initialized to 0) (in meters)}
+        \PY{l+s+sd}{    \PYZdq{}\PYZdq{}\PYZdq{}}
+            
+            \PY{c+c1}{\PYZsh{} make the initial state}
+            \PY{n}{init} \PY{o}{=} \PY{n}{State}\PY{p}{(}\PY{n}{x}\PY{o}{=}\PY{n}{params}\PY{o}{.}\PY{n}{x}\PY{p}{,} \PY{n}{v}\PY{o}{=}\PY{l+m+mi}{0}\PY{p}{)}
+            
+            \PY{c+c1}{\PYZsh{} Determine magnetic force coefficient}
+            \PY{n}{c\PYZus{}mag} \PY{o}{=} \PY{n}{params}\PY{o}{.}\PY{n}{mu\PYZus{}0} \PY{o}{*} \PY{n}{log}\PY{p}{(}\PY{p}{(}\PY{n}{params}\PY{o}{.}\PY{n}{d} \PY{o}{\PYZhy{}} \PY{n}{params}\PY{o}{.}\PY{n}{r}\PY{p}{)} \PY{o}{/} \PY{n}{params}\PY{o}{.}\PY{n}{r}\PY{p}{)} \PY{o}{/} \PY{p}{(}\PY{l+m+mi}{2} \PY{o}{*} \PY{n}{pi}\PY{p}{)}
+            
+            \PY{k}{return} \PY{n}{System}\PY{p}{(}\PY{n}{params}\PY{p}{,} \PY{n}{c\PYZus{}mag} \PY{o}{=} \PY{n}{c\PYZus{}mag}\PY{p}{,} \PY{n}{init}\PY{o}{=}\PY{n}{init}\PY{p}{)}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}5}]:} \PY{k}{def} \PY{n+nf}{mag\PYZus{}force}\PY{p}{(}\PY{n}{I}\PY{p}{,} \PY{n}{system}\PY{p}{)}\PY{p}{:}
+            \PY{l+s+sd}{\PYZdq{}\PYZdq{}\PYZdq{}}
+        \PY{l+s+sd}{    Determines magnetic force on armature due to magnetic loop of railgun. Assumes 1D system.}
+        \PY{l+s+sd}{    }
+        \PY{l+s+sd}{    Parameters:}
+        \PY{l+s+sd}{        I: Current through the circuit at time of function call. (in amperes)}
+        \PY{l+s+sd}{        system: System object containing following system parameters (relevant listed):}
+        \PY{l+s+sd}{            c\PYZus{}mag: Calculated magnetic force coefficient (in N/A\PYZca{}2)}
+        \PY{l+s+sd}{               }
+        \PY{l+s+sd}{    returns: Magnitude of magnetic force}
+        \PY{l+s+sd}{    \PYZdq{}\PYZdq{}\PYZdq{}}
+            \PY{k}{return} \PY{n}{system}\PY{o}{.}\PY{n}{c\PYZus{}mag} \PY{o}{*} \PY{n}{I}\PY{o}{*}\PY{o}{*}\PY{l+m+mi}{2}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}6}]:} \PY{k}{def} \PY{n+nf}{railgun\PYZus{}slope\PYZus{}func}\PY{p}{(}\PY{n}{state}\PY{p}{,} \PY{n}{t}\PY{p}{,} \PY{n}{system}\PY{p}{)}\PY{p}{:}
+            \PY{l+s+sd}{\PYZdq{}\PYZdq{}\PYZdq{}}
+        \PY{l+s+sd}{    Computes derivatives of the state variables. }
+        \PY{l+s+sd}{    Invokes function mag\PYZus{}force to determine magnetic force applied on armature.}
+        \PY{l+s+sd}{    }
+        \PY{l+s+sd}{    Parameters:}
+        \PY{l+s+sd}{        state: Current State object at time of function call.}
+        \PY{l+s+sd}{            x: Position of armature (initialized to params.x) (in meters)}
+        \PY{l+s+sd}{            v: Velocity of armature (initialized to 0) (in meters)}
+        \PY{l+s+sd}{        system: System object containing following system parameters (relevant listed):}
+        \PY{l+s+sd}{            Vs: Magnitude of voltage supply to circuit (in volts)}
+        \PY{l+s+sd}{            R: Resistance of the circuit (in ohms)}
+        \PY{l+s+sd}{               }
+        \PY{l+s+sd}{    returns: Magnitude of magnetic force (in newtons)}
+        \PY{l+s+sd}{    \PYZdq{}\PYZdq{}\PYZdq{}}
+            \PY{n}{x}\PY{p}{,} \PY{n}{v} \PY{o}{=} \PY{n}{state}
+        
+            \PY{n}{I} \PY{o}{=} \PY{n}{system}\PY{o}{.}\PY{n}{Vs} \PY{o}{/} \PY{n}{system}\PY{o}{.}\PY{n}{R}
+            
+            \PY{n}{F\PYZus{}mag} \PY{o}{=} \PY{n}{mag\PYZus{}force}\PY{p}{(}\PY{n}{I}\PY{p}{,} \PY{n}{system}\PY{p}{)}
+            \PY{n}{a} \PY{o}{=} \PY{n}{F\PYZus{}mag} \PY{o}{/} \PY{n}{system}\PY{o}{.}\PY{n}{mass}
+            
+            \PY{k}{return} \PY{n}{v}\PY{p}{,} \PY{n}{a}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}7}]:} \PY{k}{def} \PY{n+nf}{event\PYZus{}func\PYZus{}railgun}\PY{p}{(}\PY{n}{state}\PY{p}{,} \PY{n}{t}\PY{p}{,} \PY{n}{system}\PY{p}{)}\PY{p}{:}
+            \PY{l+s+sd}{\PYZdq{}\PYZdq{}\PYZdq{}}
+        \PY{l+s+sd}{    Stop when the position is equal to the length of rail that can be traveled.}
+        \PY{l+s+sd}{        (stop when the distance left to travel is equal to 0)}
+        \PY{l+s+sd}{    }
+        \PY{l+s+sd}{    Parameters:}
+        \PY{l+s+sd}{        state: Current State object at time of function call.}
+        \PY{l+s+sd}{            x: Position of armature (initialized to params.x) (in meters)}
+        \PY{l+s+sd}{            v: Velocity of armature (initialized to 0) (in meters)}
+        \PY{l+s+sd}{        system: System object containing following system parameters (relevant listed):}
+        \PY{l+s+sd}{            L: Length armature has to travel along rails before launch (in meters)}
+        \PY{l+s+sd}{               }
+        \PY{l+s+sd}{    returns: Distance the armature has left to travel.}
+        \PY{l+s+sd}{    \PYZdq{}\PYZdq{}\PYZdq{}}
+            \PY{n}{x}\PY{p}{,} \PY{n}{v} \PY{o}{=} \PY{n}{state}
+            \PY{k}{return} \PY{n}{x} \PY{o}{\PYZhy{}} \PY{n}{system}\PY{o}{.}\PY{n}{L}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}8}]:} \PY{k}{def} \PY{n+nf}{sim\PYZus{}railgun}\PY{p}{(}\PY{n}{mass}\PY{p}{,} \PY{n}{v\PYZus{}supply}\PY{p}{,} \PY{n}{params}\PY{p}{)}\PY{p}{:}  
+            \PY{l+s+sd}{\PYZdq{}\PYZdq{}\PYZdq{}}
+        \PY{l+s+sd}{    Simulate the railgun model.}
+        \PY{l+s+sd}{    }
+        \PY{l+s+sd}{    Parameters:}
+        \PY{l+s+sd}{        mass: Mass of armature (in kilograms)}
+        \PY{l+s+sd}{        params: Params object containing following:}
+        \PY{l+s+sd}{            x: Initial position of armature (in meters)}
+        \PY{l+s+sd}{            d: Separation distance between two rails (in meters)}
+        \PY{l+s+sd}{            r: Radii of the rails (in meters)}
+        \PY{l+s+sd}{            L: Length armature has to travel along rails before launch (in meters)}
+        \PY{l+s+sd}{            mass: Mass of armature (in kilograms)}
+        \PY{l+s+sd}{            Vs: (Initial) Voltage supply magnitude (in volts)}
+        \PY{l+s+sd}{            R: Resistance of railgun circuit (in ohms)}
+        \PY{l+s+sd}{            mu\PYZus{}0: Vacuum permeability constant (in N/A\PYZca{}2)}
+        \PY{l+s+sd}{            t\PYZus{}end: Simulation end time (in seconds)}
+        \PY{l+s+sd}{               }
+        \PY{l+s+sd}{    returns:}
+        \PY{l+s+sd}{        x: Final position of the armature.}
+        \PY{l+s+sd}{        v: Final velocity of the armature.}
+        \PY{l+s+sd}{    \PYZdq{}\PYZdq{}\PYZdq{}}
+            \PY{n}{params} \PY{o}{=} \PY{n}{Params}\PY{p}{(}\PY{n}{params}\PY{p}{,} \PY{n}{mass}\PY{o}{=}\PY{n}{mass}\PY{p}{,} \PY{n}{Vs} \PY{o}{=} \PY{n}{v\PYZus{}supply}\PY{p}{)}
+            \PY{n}{system} \PY{o}{=} \PY{n}{make\PYZus{}railgun\PYZus{}system}\PY{p}{(}\PY{n}{params}\PY{p}{)}
+            \PY{n}{results}\PY{p}{,} \PY{n}{details} \PY{o}{=} \PY{n}{run\PYZus{}ode\PYZus{}solver}\PY{p}{(}\PY{n}{system}\PY{p}{,} \PY{n}{railgun\PYZus{}slope\PYZus{}func}\PY{p}{,} \PY{n}{events}\PY{o}{=}\PY{n}{event\PYZus{}func\PYZus{}railgun}\PY{p}{)}
+            \PY{k}{return} \PY{n}{results}\PY{o}{.}\PY{n}{x}\PY{p}{,} \PY{n}{results}\PY{o}{.}\PY{n}{v}
+\end{Verbatim}
+
+
+    The following function runs a simulation of firing the railgun and the
+effect which this action has on the orbit of the earth. The function
+returns a time frame describing the earth's position and velocity at
+various points in time after firing the railgun.
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}9}]:} \PY{k}{def} \PY{n+nf}{launch\PYZus{}simulation}\PY{p}{(}\PY{n}{mass\PYZus{}armature}\PY{p}{,} \PY{n}{railgun\PYZus{}voltage}\PY{p}{,} \PY{n}{railgun\PYZus{}params}\PY{p}{,} 
+                              \PY{n}{sim\PYZus{}t\PYZus{}end}\PY{p}{,} \PY{n}{orbital\PYZus{}results}\PY{p}{)}\PY{p}{:}
+            \PY{c+c1}{\PYZsh{} Simulate railgun launch}
+            \PY{n}{rail\PYZus{}x}\PY{p}{,} \PY{n}{rail\PYZus{}v} \PY{o}{=} \PY{n}{sim\PYZus{}railgun}\PY{p}{(}\PY{n}{mass\PYZus{}armature}\PY{p}{,} \PY{n}{railgun\PYZus{}voltage}\PY{p}{,} \PY{n}{railgun\PYZus{}params}\PY{p}{)}
+            
+            \PY{n}{final\PYZus{}armature\PYZus{}speed} \PY{o}{=} \PY{n}{get\PYZus{}last\PYZus{}value}\PY{p}{(}\PY{n}{rail\PYZus{}v}\PY{p}{)}
+            \PY{c+c1}{\PYZsh{} Simulate after\PYZhy{}effects of railgun launch}
+            \PY{n}{shot\PYZus{}results} \PY{o}{=} \PY{n}{run\PYZus{}simulation\PYZus{}after\PYZus{}cannon}\PY{p}{(}\PY{n}{mass\PYZus{}armature}\PY{p}{,} \PY{n}{final\PYZus{}armature\PYZus{}speed}\PY{p}{,} 
+                                                       \PY{n}{sim\PYZus{}t\PYZus{}end}\PY{p}{,} \PY{n}{orbital\PYZus{}results}\PY{p}{)}
+            
+            \PY{k}{return} \PY{n}{shot\PYZus{}results}
+\end{Verbatim}
+
+
+    \hypertarget{planetary-motion-model-code}{%
+\section{Planetary Motion Model
+code}\label{planetary-motion-model-code}}
+
+The following functions describe the planitary motion simulation
+
+    The following code describes the main function which is used in running
+simulations of a planet in orbit around the sun. This function returns a
+time frame detailing the velocity and position of the plenet at varous
+points in time.
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}10}]:} \PY{k}{def} \PY{n+nf}{run\PYZus{}planet\PYZus{}simulation} \PY{p}{(}\PY{n}{earth\PYZus{}position\PYZus{}x}\PY{p}{,}\PY{n}{earth\PYZus{}position\PYZus{}y}\PY{p}{,} \PY{n}{earth\PYZus{}velocity\PYZus{}x}\PY{p}{,} \PY{n}{earth\PYZus{}velocity\PYZus{}y}\PY{p}{,}\PY{n}{earth\PYZus{}mass}\PY{p}{,}\PY{n}{num\PYZus{}years}\PY{p}{)}\PY{p}{:}
+             \PY{l+s+sd}{\PYZdq{}\PYZdq{}\PYZdq{}This function runs a simulation of a two body planetary system. }
+         \PY{l+s+sd}{    This simulation assumes that the sun in the planetary system has the mass of earth\PYZsq{}s sun and is at a fixed location in space (0,0) for conveianance}
+         \PY{l+s+sd}{    the planet\PYZsq{}s position velocity and mass are supplied to better inform the simulation.}
+         \PY{l+s+sd}{    The number of years dictates how many years the simulation should be run for.}
+         \PY{l+s+sd}{    Max\PYZus{}step\PYZus{}size is the maximum step size in seconds}
+         \PY{l+s+sd}{    The function returns the trajectory of the supplied planet.\PYZdq{}\PYZdq{}\PYZdq{}}
+             \PY{c+c1}{\PYZsh{} creates the state for the simulation}
+             \PY{c+c1}{\PYZsh{}distance in meteres velocity in m/s}
+             \PY{n}{st8} \PY{o}{=} \PY{n}{State}\PY{p}{(}\PY{n}{xpos} \PY{o}{=} \PY{n}{earth\PYZus{}position\PYZus{}x}\PY{p}{,} 
+                         \PY{n}{ypos} \PY{o}{=} \PY{n}{earth\PYZus{}position\PYZus{}y}\PY{p}{,} 
+                         \PY{n}{xvel} \PY{o}{=} \PY{n}{earth\PYZus{}velocity\PYZus{}x}\PY{p}{,} 
+                         \PY{n}{yvel} \PY{o}{=} \PY{n}{earth\PYZus{}velocity\PYZus{}y}\PY{p}{)}
+             \PY{c+c1}{\PYZsh{}Creates a system which holds the parameters of the simulation}
+             \PY{c+c1}{\PYZsh{}G = m\PYZca{}3/(kg*s\PYZca{}2) masses are in kg masses are in kg radi are in meteres velocities are in m/s}
+             \PY{n}{sys} \PY{o}{=} \PY{n}{System}\PY{p}{(}\PY{n}{init} \PY{o}{=} \PY{n}{st8}\PY{p}{,}
+                          \PY{n}{G} \PY{o}{=} \PY{l+m+mf}{6.67408}\PY{o}{*}\PY{l+m+mi}{10}\PY{o}{*}\PY{o}{*}\PY{p}{(}\PY{o}{\PYZhy{}}\PY{l+m+mi}{11}\PY{p}{)}\PY{p}{,} 
+                          \PY{n}{M\PYZus{}earth} \PY{o}{=} \PY{n}{earth\PYZus{}mass}\PY{p}{,} 
+                          \PY{n}{M\PYZus{}sun} \PY{o}{=}\PY{l+m+mf}{1.989}\PY{o}{*}\PY{l+m+mi}{10}\PY{o}{*}\PY{o}{*}\PY{l+m+mi}{30}\PY{p}{,} 
+                          \PY{n}{R\PYZus{}earth} \PY{o}{=} \PY{l+m+mf}{6.3781}\PY{o}{*}\PY{l+m+mi}{10}\PY{o}{*}\PY{o}{*}\PY{l+m+mi}{6}\PY{p}{,} 
+                          \PY{n}{R\PYZus{}sun}\PY{o}{=} \PY{l+m+mf}{6.95700}\PY{o}{*}\PY{l+m+mi}{10}\PY{o}{*}\PY{o}{*}\PY{l+m+mi}{8}\PY{p}{,} 
+                          \PY{n}{t\PYZus{}end} \PY{o}{=} \PY{l+m+mf}{365.25}\PY{o}{*}\PY{l+m+mi}{24}\PY{o}{*}\PY{l+m+mi}{60}\PY{o}{*}\PY{l+m+mi}{60}\PY{o}{*}\PY{n}{num\PYZus{}years}\PY{p}{,}
+                          \PY{n}{Earth\PYZus{}Radius} \PY{o}{=} \PY{l+m+mi}{6378}\PY{o}{*}\PY{l+m+mi}{10}\PY{o}{*}\PY{o}{*}\PY{l+m+mi}{3}\PY{p}{,}
+                          \PY{n}{sun\PYZus{}pos} \PY{o}{=} \PY{n}{Vector}\PY{p}{(}\PY{l+m+mi}{0}\PY{p}{,}\PY{l+m+mi}{0}\PY{p}{)}\PY{p}{)}
+             
+             \PY{c+c1}{\PYZsh{}runs an ODE solver to run the simulation and restricts the ODE solver to taking steps with a maximum size of one day}
+             \PY{n}{results}\PY{p}{,}\PY{n}{details} \PY{o}{=} \PY{n}{run\PYZus{}ode\PYZus{}solver}\PY{p}{(}\PY{n}{sys}\PY{p}{,}\PY{n}{planet\PYZus{}slope\PYZus{}func}\PY{p}{,} \PY{n}{max\PYZus{}step}\PY{o}{=}\PY{l+m+mi}{60}\PY{o}{*}\PY{l+m+mi}{60}\PY{o}{*}\PY{l+m+mi}{24}\PY{p}{)}
+             
+             \PY{c+c1}{\PYZsh{}returns the results of the solver}
+             \PY{k}{return} \PY{n}{results}
+\end{Verbatim}
+
+
+    This function simulates a change in momentum of the earth as a result of
+the earth firing a projectile. This function performs the conservation
+of momentum calculations then it runs a simulation of the earth in orbit
+around the sun with the earth's updated mass and velocity as a result of
+the change in momentum. This function returns a time frame detailing the
+earth's position and velocity at various points in time after the shot
+has been fired.
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}11}]:} \PY{k}{def} \PY{n+nf}{run\PYZus{}simulation\PYZus{}after\PYZus{}cannon} \PY{p}{(}\PY{n}{Mass\PYZus{}shot}\PY{p}{,} \PY{n}{Shot\PYZus{}velocity}\PY{p}{,} \PY{n}{number\PYZus{}years\PYZus{}after\PYZus{}shot}\PY{p}{,} \PY{n}{orbital\PYZus{}results}\PY{p}{)}\PY{p}{:}
+             \PY{l+s+sd}{\PYZdq{}\PYZdq{}\PYZdq{}This code runs a simulation of the earth firing a projectile of a given mass and velocity.}
+         \PY{l+s+sd}{    This code is intended to be run after another simulation of normal orbital motion which will inform the starting position of the earth before the projectile is fired.}
+         \PY{l+s+sd}{    Masses are in kg}
+         \PY{l+s+sd}{    Velocities are in m/s}
+         \PY{l+s+sd}{    number of years after shot is a number whic dictates how long to run the simulation of the earth\PYZsq{}s orbital motion after the projectile is fired.}
+         \PY{l+s+sd}{    This function returns a time frame containing the x and y poition and velocity of the earth throughout the simulation\PYZdq{}\PYZdq{}\PYZdq{}}
+             \PY{c+c1}{\PYZsh{}gets a vector of the velocity of earth based on the results of the original simulation}
+             \PY{n}{orbital\PYZus{}velocity} \PY{o}{=} \PY{n}{Vector}\PY{p}{(}\PY{n}{get\PYZus{}last\PYZus{}value}\PY{p}{(}\PY{n}{orbital\PYZus{}results}\PY{o}{.}\PY{n}{xvel}\PY{p}{)}\PY{p}{,}\PY{n}{get\PYZus{}last\PYZus{}value}\PY{p}{(}\PY{n}{orbital\PYZus{}results}\PY{o}{.}\PY{n}{yvel}\PY{p}{)}\PY{p}{)}
+             
+             \PY{c+c1}{\PYZsh{}fires the railgun}
+             \PY{n}{post\PYZus{}cannon\PYZus{}velocity}\PY{p}{,} \PY{n}{post\PYZus{}cannon\PYZus{}mass} \PY{o}{=} \PY{n}{fire\PYZus{}cannon}\PY{p}{(}\PY{n}{orbital\PYZus{}velocity}\PY{p}{,}\PY{l+m+mf}{5.972}\PY{o}{*}\PY{l+m+mi}{10}\PY{o}{*}\PY{o}{*}\PY{l+m+mi}{24}\PY{p}{,} \PY{n}{Mass\PYZus{}shot}\PY{p}{,} \PY{n}{Shot\PYZus{}velocity}\PY{p}{)}
+             
+             \PY{c+c1}{\PYZsh{}runs a simulation of the earth and the sun with the earth\PYZsq{}s updated velocity allowing the ODE solver to take any step size}
+             \PY{n}{escape\PYZus{}results} \PY{o}{=} \PY{n}{run\PYZus{}planet\PYZus{}simulation}\PY{p}{(}\PY{n}{get\PYZus{}last\PYZus{}value}\PY{p}{(}\PY{n}{orbital\PYZus{}results}\PY{o}{.}\PY{n}{xpos}\PY{p}{)}\PY{p}{,}\PY{n}{get\PYZus{}last\PYZus{}value}\PY{p}{(}\PY{n}{orbital\PYZus{}results}\PY{o}{.}\PY{n}{ypos}\PY{p}{)}\PY{p}{,}\PY{n}{post\PYZus{}cannon\PYZus{}velocity}\PY{o}{.}\PY{n}{x}\PY{p}{,}\PY{n}{post\PYZus{}cannon\PYZus{}velocity}\PY{o}{.}\PY{n}{y}\PY{p}{,}\PY{n}{post\PYZus{}cannon\PYZus{}mass}\PY{p}{,}\PY{n}{number\PYZus{}years\PYZus{}after\PYZus{}shot}\PY{p}{)}
+             
+             \PY{c+c1}{\PYZsh{}escape\PYZus{}results = run\PYZus{}planet\PYZus{}simulation(get\PYZus{}last\PYZus{}value(orbital\PYZus{}results.xpos),get\PYZus{}last\PYZus{}value(orbital\PYZus{}results.ypos),get\PYZus{}last\PYZus{}value(orbital\PYZus{}results.xvel),get\PYZus{}last\PYZus{}value(orbital\PYZus{}results.yvel),5.972*10**24,number\PYZus{}years\PYZus{}after\PYZus{}shot)}
+             
+             \PY{c+c1}{\PYZsh{}returns the results}
+             \PY{k}{return} \PY{n}{escape\PYZus{}results}
+\end{Verbatim}
+
+
+    The remaining functions expand upon the above functions in more detail.
+The in depth explanation can be skipped by proceding to the Results
+section below.
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}12}]:} \PY{k}{def} \PY{n+nf}{planet\PYZus{}slope\PYZus{}func}\PY{p}{(}\PY{n}{st8}\PY{p}{,}\PY{n}{t}\PY{p}{,}\PY{n}{sys}\PY{p}{)}\PY{p}{:}
+             \PY{l+s+sd}{\PYZdq{}\PYZdq{}\PYZdq{}Describes the change in position and velocity in both the x and y plane between every time step.}
+         \PY{l+s+sd}{    The function takes in a state which describes the old position of the system}
+         \PY{l+s+sd}{    t is the time of the syatem, it is not actually used in calculations however it is a required argument for use with an ODE Solver}
+         \PY{l+s+sd}{    sys is a system object which contains system constants\PYZdq{}\PYZdq{}\PYZdq{}}
+             
+             \PY{c+c1}{\PYZsh{}extracts the values from the state because the ODE solver does not store variables in a state object}
+             \PY{n}{xpos}\PY{p}{,}\PY{n}{ypos}\PY{p}{,}\PY{n}{xvel}\PY{p}{,}\PY{n}{yvel}\PY{o}{=} \PY{n}{st8}
+             \PY{c+c1}{\PYZsh{}creates a vector which describes the position of the planet}
+             \PY{n}{planet\PYZus{}pos} \PY{o}{=} \PY{n}{Vector}\PY{p}{(}\PY{n}{xpos}\PY{p}{,}\PY{n}{ypos}\PY{p}{)}
+             
+             \PY{c+c1}{\PYZsh{}describes a system of differential equations which explain the changes in the system}
+             \PY{c+c1}{\PYZsh{}update the velocity in each direction}
+             \PY{n}{dxveldt} \PY{o}{=} \PY{n}{get\PYZus{}grav\PYZus{}acceleration}\PY{p}{(}\PY{n}{sys}\PY{o}{.}\PY{n}{G}\PY{p}{,} \PY{n}{sys}\PY{o}{.}\PY{n}{M\PYZus{}sun}\PY{p}{,} \PY{n}{sys}\PY{o}{.}\PY{n}{M\PYZus{}earth}\PY{p}{,} \PY{n}{planet\PYZus{}pos}\PY{p}{,}\PY{n}{sys}\PY{o}{.}\PY{n}{sun\PYZus{}pos}\PY{p}{)}\PY{o}{.}\PY{n}{x}
+             \PY{n}{dyveldt} \PY{o}{=} \PY{n}{get\PYZus{}grav\PYZus{}acceleration}\PY{p}{(}\PY{n}{sys}\PY{o}{.}\PY{n}{G}\PY{p}{,} \PY{n}{sys}\PY{o}{.}\PY{n}{M\PYZus{}sun}\PY{p}{,} \PY{n}{sys}\PY{o}{.}\PY{n}{M\PYZus{}earth}\PY{p}{,} \PY{n}{planet\PYZus{}pos}\PY{p}{,}\PY{n}{sys}\PY{o}{.}\PY{n}{sun\PYZus{}pos}\PY{p}{)}\PY{o}{.}\PY{n}{y}
+             
+             \PY{c+c1}{\PYZsh{}update the position in each direction}
+             \PY{n}{dxposdt} \PY{o}{=} \PY{n}{xvel}
+             \PY{n}{dyposdt} \PY{o}{=} \PY{n}{yvel}
+             
+             \PY{c+c1}{\PYZsh{}returns the change in the state variables}
+             \PY{k}{return} \PY{n}{dxposdt}\PY{p}{,}\PY{n}{dyposdt}\PY{p}{,}\PY{n}{dxveldt}\PY{p}{,}\PY{n}{dyveldt}
+\end{Verbatim}
+
+
+    The following function performs the momentum conservation calculations
+on the earth. This function returns an updated mass and velocity of the
+earth based on the change in momentum from the firing of a projecile
+with a given mass and velocity.
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}13}]:} \PY{k}{def} \PY{n+nf}{fire\PYZus{}cannon}\PY{p}{(}\PY{n}{planet\PYZus{}velocity\PYZus{}vector}\PY{p}{,} \PY{n}{Mass\PYZus{}earth}\PY{p}{,} \PY{n}{Mass\PYZus{}shot}\PY{p}{,} \PY{n}{Shot\PYZus{}speed}\PY{p}{)}\PY{p}{:}
+             \PY{l+s+sd}{\PYZdq{}\PYZdq{}\PYZdq{}Runs a function which updates the velocity and mass of a planet assuming that it is accelerated via mass ejection.}
+         \PY{l+s+sd}{    Calculations are based on conservation of momentum.}
+         \PY{l+s+sd}{    Masses are in kilograms}
+         \PY{l+s+sd}{    Speeds are in m/s}
+         \PY{l+s+sd}{    The velocity vector describes the last known velocity of the planet.}
+         \PY{l+s+sd}{    MODELING ASSUMPTION CONSTRAINT:  This model assumes that the earth exerts no gravitational pull on the projectile.}
+         \PY{l+s+sd}{    This means that projectiles fired at less than their escape velocity will not be accurate to the real world where they would return to the earth and recombine with it.\PYZdq{}\PYZdq{}\PYZdq{}}
+             \PY{k}{if} \PY{n}{Shot\PYZus{}speed} \PY{o}{!=} \PY{l+m+mi}{0}\PY{p}{:}
+                 \PY{c+c1}{\PYZsh{}calculates the magnitude of the new velocity of the planet}
+                 \PY{n}{velocity\PYZus{}vector\PYZus{}magnitude} \PY{o}{=} \PY{p}{(}\PY{n}{Mass\PYZus{}earth}\PY{o}{*}\PY{n}{planet\PYZus{}velocity\PYZus{}vector}\PY{o}{.}\PY{n}{mag} \PY{o}{+} \PY{n}{Mass\PYZus{}shot}\PY{o}{*}\PY{n}{Shot\PYZus{}speed}\PY{p}{)}\PY{o}{/}\PY{p}{(}\PY{n}{Mass\PYZus{}earth}\PY{o}{\PYZhy{}}\PY{n}{Mass\PYZus{}shot}\PY{p}{)} 
+                 \PY{c+c1}{\PYZsh{}multiplies the magnitude by a unit vector in the direction of the last known velocity to create a velocity vector in the proper direction}
+                 \PY{n}{planet\PYZus{}velocity\PYZus{}vector} \PY{o}{=} \PY{p}{(}\PY{n}{planet\PYZus{}velocity\PYZus{}vector}\PY{o}{/}\PY{n}{planet\PYZus{}velocity\PYZus{}vector}\PY{o}{.}\PY{n}{mag}\PY{p}{)}\PY{o}{*}\PY{n}{velocity\PYZus{}vector\PYZus{}magnitude}
+          
+                 \PY{c+c1}{\PYZsh{}updates the mass of the earth to account for the fact that the shot removed mass from the earth}
+                 \PY{n}{Mass\PYZus{}earth} \PY{o}{=} \PY{n}{Mass\PYZus{}earth} \PY{o}{\PYZhy{}} \PY{n}{Mass\PYZus{}shot}
+             
+             \PY{c+c1}{\PYZsh{}retuns the new velocity as a vector and the new mass of the earth}
+             \PY{k}{return} \PY{n}{planet\PYZus{}velocity\PYZus{}vector}\PY{p}{,} \PY{n}{Mass\PYZus{}earth}
+\end{Verbatim}
+
+
+    This function finds the magnitude of the gravitational acceleration on a
+planet by the sun using F = ma. The function returns the acceleration in
+terms of m/s\^{}2.
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}14}]:} \PY{k}{def} \PY{n+nf}{get\PYZus{}grav\PYZus{}acceleration}\PY{p}{(}\PY{n}{G}\PY{p}{,}\PY{n}{M}\PY{p}{,}\PY{n}{m}\PY{p}{,}\PY{n}{planet\PYZus{}vector}\PY{p}{,}\PY{n}{sun\PYZus{}vector}\PY{p}{)}\PY{p}{:}
+             \PY{l+s+sd}{\PYZdq{}\PYZdq{}\PYZdq{}Calculates acceleration due to gravity with F = ma}
+         \PY{l+s+sd}{    F in N}
+         \PY{l+s+sd}{    m in kg}
+         \PY{l+s+sd}{    a in m/s\PYZca{}2\PYZdq{}\PYZdq{}\PYZdq{}}
+             \PY{c+c1}{\PYZsh{}gets the force and divides by the orbiting body to get the acceleration of the orbing body}
+             \PY{k}{return} \PY{n}{get\PYZus{}gravitational\PYZus{}force}\PY{p}{(}\PY{n}{G}\PY{p}{,}\PY{n}{M}\PY{p}{,}\PY{n}{m}\PY{p}{,}\PY{n}{planet\PYZus{}vector}\PY{p}{,}\PY{n}{sun\PYZus{}vector}\PY{p}{)}\PY{o}{/}\PY{n}{m}
+\end{Verbatim}
+
+
+    The following function applies the law of universal gravitation to find
+the magnitude of the gravitational force for a planet orbiting a star.
+The function retunrs a force in N which describes the gravitational
+force.
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}15}]:} \PY{k}{def} \PY{n+nf}{get\PYZus{}gravitational\PYZus{}force}\PY{p}{(}\PY{n}{G}\PY{p}{,}\PY{n}{M}\PY{p}{,}\PY{n}{m}\PY{p}{,}\PY{n}{planet\PYZus{}vector}\PY{p}{,} \PY{n}{sun\PYZus{}vector}\PY{p}{)}\PY{p}{:}
+             \PY{l+s+sd}{\PYZdq{}\PYZdq{}\PYZdq{}Applies law of universal gravitation and returns the force of gravity as a vector towards the center of the circle in N\PYZdq{}\PYZdq{}\PYZdq{}}
+             \PY{c+c1}{\PYZsh{}calculates the vector pointing from the planet to the sun}
+             \PY{n}{planet\PYZus{}to\PYZus{}sun\PYZus{}vector} \PY{o}{=} \PY{n}{sun\PYZus{}vector}\PY{o}{\PYZhy{}}\PY{n}{planet\PYZus{}vector}
+             \PY{c+c1}{\PYZsh{}takes the direction of the previous vector}
+             \PY{n}{Direction\PYZus{}vector} \PY{o}{=} \PY{n}{planet\PYZus{}to\PYZus{}sun\PYZus{}vector}\PY{o}{/}\PY{n}{planet\PYZus{}to\PYZus{}sun\PYZus{}vector}\PY{o}{.}\PY{n}{mag}
+             \PY{c+c1}{\PYZsh{}calculates the acceleration of the planet}
+             \PY{n}{acceleration\PYZus{}mag} \PY{o}{=} \PY{p}{(}\PY{n}{G}\PY{o}{*}\PY{n}{M}\PY{o}{*}\PY{n}{m}\PY{p}{)}\PY{o}{/}\PY{p}{(}\PY{n}{planet\PYZus{}vector}\PY{o}{.}\PY{n}{mag}\PY{o}{*}\PY{o}{*}\PY{l+m+mi}{2}\PY{p}{)}
+             \PY{c+c1}{\PYZsh{}returns a vector which has the magnitude of the acceleration and a direction towards the star}
+             \PY{k}{return} \PY{n}{Direction\PYZus{}vector} \PY{o}{*} \PY{n}{acceleration\PYZus{}mag}
+\end{Verbatim}
+
+
+    \hypertarget{results}{%
+\section{Results}\label{results}}
+
+    The following code describes the inital state of the earth. values have
+been chosen to place the earth at a distance of one astronomical unit
+(AU) away from the sun (the average distance from the earth to the sun),
+moving at a velocity which corrasponds to the observed velocity
+withwhich the earth orbits the sun (assuming a nearly circular orbit and
+a distance from the sun of 1 AU), and the measured mass of the earth.
+The simulation is set to run for one year to demonstrate earth in stable
+orbit before the railgun is fired.
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}17}]:} \PY{c+c1}{\PYZsh{}Describes the inital position, in vector format, of the earth (m)}
+         \PY{n}{inital\PYZus{}earth\PYZus{}x\PYZus{}position} \PY{o}{=} \PY{l+m+mi}{149597900000}
+         \PY{n}{inital\PYZus{}earth\PYZus{}y\PYZus{}position} \PY{o}{=} \PY{l+m+mi}{0}
+         \PY{c+c1}{\PYZsh{}Describes the inital velocity, in vector format, of the earth (m/s)}
+         \PY{n}{inital\PYZus{}earth\PYZus{}x\PYZus{}velocity} \PY{o}{=} \PY{l+m+mi}{0}
+         \PY{n}{inital\PYZus{}earth\PYZus{}y\PYZus{}velocity} \PY{o}{=} \PY{l+m+mi}{29785}
+         \PY{c+c1}{\PYZsh{}Describes the inital mass of the earth (kg)}
+         \PY{n}{inital\PYZus{}earth\PYZus{}mass} \PY{o}{=} \PY{l+m+mf}{5.972}\PY{o}{*}\PY{l+m+mi}{10}\PY{o}{*}\PY{o}{*}\PY{l+m+mi}{24}
+         \PY{c+c1}{\PYZsh{}Describes the length of the stable orbit simulation (years)}
+         \PY{n}{stable\PYZus{}orbit\PYZus{}simulation\PYZus{}runtime} \PY{o}{=} \PY{l+m+mi}{1}
+         \PY{k+kc}{None}
+\end{Verbatim}
+
+
+    The following code runs a simulation whic sweeps acoss masses of
+projectiles ranging from 1000 kg (about the mass of the average car) to
+1*10\^{}24 kg (roughly one fifth the mass of the earth)
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}18}]:} \PY{n}{orbital\PYZus{}results} \PY{o}{=} \PY{n}{run\PYZus{}planet\PYZus{}simulation}\PY{p}{(}\PY{n}{inital\PYZus{}earth\PYZus{}x\PYZus{}position}\PY{p}{,}\PY{n}{inital\PYZus{}earth\PYZus{}y\PYZus{}position}\PY{p}{,} \PY{n}{inital\PYZus{}earth\PYZus{}x\PYZus{}velocity}\PY{p}{,} \PY{n}{inital\PYZus{}earth\PYZus{}y\PYZus{}velocity}\PY{p}{,}\PY{n}{inital\PYZus{}earth\PYZus{}mass}\PY{p}{,}\PY{n}{stable\PYZus{}orbit\PYZus{}simulation\PYZus{}runtime}\PY{p}{)} 
+         \PY{n}{plt}\PY{o}{.}\PY{n}{figure}\PY{p}{(}\PY{l+m+mi}{1}\PY{p}{)}
+         \PY{n}{plot}\PY{p}{(}\PY{n}{orbital\PYZus{}results}\PY{o}{.}\PY{n}{xpos}\PY{p}{,} \PY{n}{orbital\PYZus{}results}\PY{o}{.}\PY{n}{ypos}\PY{p}{)}
+         \PY{c+c1}{\PYZsh{} Inputs as parameters}
+         
+         \PY{n}{possible\PYZus{}masses} \PY{o}{=} \PY{n}{np}\PY{o}{.}\PY{n}{logspace}\PY{p}{(}\PY{l+m+mi}{3}\PY{p}{,} \PY{l+m+mi}{24}\PY{p}{,}\PY{l+m+mi}{5}\PY{p}{)}
+         \PY{k}{for} \PY{n}{mass} \PY{o+ow}{in} \PY{n}{possible\PYZus{}masses}\PY{p}{:}
+             \PY{n}{v\PYZus{}s} \PY{o}{=} \PY{l+m+mf}{1e15} \PY{o}{*} \PY{n}{V}
+             \PY{n}{shot\PYZus{}results} \PY{o}{=} \PY{n}{launch\PYZus{}simulation}\PY{p}{(}\PY{n}{mass}\PY{p}{,} \PY{n}{v\PYZus{}s}\PY{p}{,} \PY{n}{params\PYZus{}railgun}\PY{p}{,} \PY{l+m+mi}{1}\PY{p}{,} \PY{n}{orbital\PYZus{}results}\PY{p}{)}
+             \PY{n}{plot}\PY{p}{(}\PY{n}{shot\PYZus{}results}\PY{o}{.}\PY{n}{xpos}\PY{p}{,}\PY{n}{shot\PYZus{}results}\PY{o}{.}\PY{n}{ypos}\PY{p}{,} \PY{n}{label} \PY{o}{=} \PY{n+nb}{str}\PY{p}{(}\PY{n}{mass}\PY{p}{)}\PY{o}{+} \PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{ kg}\PY{l+s+s2}{\PYZdq{}}\PY{p}{)}
+         \PY{n}{plt}\PY{o}{.}\PY{n}{xlabel}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Distance from the Sun along orthoganal axes(m)}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+         \PY{n}{plt}\PY{o}{.}\PY{n}{ylabel}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Distance from the Sun along orthoganal axes (m)}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+         \PY{n}{plt}\PY{o}{.}\PY{n}{title}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Orbit of the Earth before vs. after firing the railgun}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+         \PY{k+kc}{None}
+\end{Verbatim}
+
+
+    \begin{center}
+    \adjustimage{max size={0.9\linewidth}{0.9\paperheight}}{output_32_0.png}
+    \end{center}
+    { \hspace*{\fill} \\}
+    
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}19}]:} \PY{n}{fin\PYZus{}v} \PY{o}{=} \PY{n}{pd}\PY{o}{.}\PY{n}{Series}\PY{p}{(}\PY{n}{index} \PY{o}{=} \PY{n}{possible\PYZus{}masses}\PY{p}{)}
+         \PY{k}{for} \PY{n}{mass} \PY{o+ow}{in} \PY{n}{possible\PYZus{}masses}\PY{p}{:}
+             \PY{n}{v\PYZus{}s} \PY{o}{=} \PY{l+m+mf}{1e27} \PY{o}{*} \PY{n}{V}
+             \PY{n}{x}\PY{p}{,} \PY{n}{v} \PY{o}{=} \PY{n}{sim\PYZus{}railgun}\PY{p}{(}\PY{n}{mass}\PY{p}{,} \PY{n}{v\PYZus{}s}\PY{p}{,} \PY{n}{params\PYZus{}railgun}\PY{p}{)}
+             \PY{n}{fin\PYZus{}v}\PY{p}{[}\PY{n}{mass}\PY{p}{]} \PY{o}{=} \PY{n}{get\PYZus{}last\PYZus{}value}\PY{p}{(}\PY{n}{v}\PY{p}{)}
+         \PY{n}{fin\PYZus{}v}
+\end{Verbatim}
+
+
+\begin{Verbatim}[commandchars=\\\{\}]
+{\color{outcolor}Out[{\color{outcolor}19}]:} 1.000000e+03    0.000000e+00
+         1.778279e+08    0.000000e+00
+         3.162278e+13    0.000000e+00
+         5.623413e+18    0.000000e+00
+         1.000000e+24    2.880313e+16
+         dtype: float64
+\end{Verbatim}
+            
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}20}]:} \PY{l+m+mf}{1e27}
+\end{Verbatim}
+
+
+\begin{Verbatim}[commandchars=\\\{\}]
+{\color{outcolor}Out[{\color{outcolor}20}]:} 1e+27
+\end{Verbatim}
+            
+
+    % Add a bibliography block to the postdoc
+    
+    
+    
+    \end{document}
